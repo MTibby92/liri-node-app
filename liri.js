@@ -9,7 +9,7 @@ var spotify = require('spotify')
 // var access_token_secret = twitterKeys.access_token_secret
 
 console.log(twitterKeys.consumer_key)
-console.log(consumer_key)
+// console.log(consumer_key)
 
 var command = process.argv[2]
 var userData = process.argv[3]
@@ -21,14 +21,24 @@ switch(command) {
 		// do something
 	case 'spotify-this-song':
 		if (userData === undefined) {
-			spotify.search({type: 'track', query: defaultSong}, function (err,data) {
-				if (err) {throw err}
-
+			spotify.search({type: 'track', query: '"The+Sign" artist:"Ace+of+Base"'}, function (err,data) {
+				if (err) {
+					return console.log(err)
+				}else {
+					// console.log(data)
+					console.log('Artist:', data.tracks.items[0].artists[0].name)
+					console.log('Track:', data.tracks.items[0].name)
+					console.log('Preview Link:', data.tracks.items[0].preview_url)
+					console.log('Album:', data.tracks.items[0].album.name)
+				}
 			})
 		} else {
-			spotify.search({type: 'track', query: userData}, function (err,data) {
-				if (err) {throw err}
-
+			spotify.search({type: 'track', query: userData, limit: 5}, function (err,data) {
+				if (err) {
+					return console.log(err)
+				} else {
+					console.log(data)
+				}
 			})
 		}
 	case 'movie-this':
