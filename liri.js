@@ -1,17 +1,21 @@
 var twitterObj = require('./keys.js')
 var twitterKeys = twitterObj.twitterKeys
 
-var twitter = require('twitter')
+var Twitter = require('twitter')
 var spotify = require('spotify')
 var request = require('request')
 
-// var consumer_key = twitterKeys.consumer_key
-// var consumer_secret = twitterKeys.consumer_secret
-// var access_token_key = twitterKeys.access_token_key
-// var access_token_secret = twitterKeys.access_token_secret
+var client = new Twitter({
+  consumer_key: twitterKeys.consumer_key,
+  consumer_secret: twitterKeys.consumer_secret,
+  access_token_key: twitterKeys.access_token_key,
+  access_token_secret: twitterKeys.access_token_secret
+});
 
-console.log(twitterKeys.consumer_key)
-// console.log(consumer_key)
+// console.log(twitterKeys.consumer_key)
+// console.log(twitterKeys.consumer_secret)
+// console.log(twitterKeys.access_token_key)
+// console.log(twitterKeys.access_token_secret)
 
 var command = process.argv[2]
 var userData = process.argv[3]
@@ -20,7 +24,15 @@ var defaultMovie = 'Mr. Nobody'
 
 switch(command) {
 	case 'my-tweets':
-		// do something
+		client.get('search/tweets', {q: '@mtibby92', count: '3'}, function(err,tweets, response) {
+			if (err) {
+				return console.log(err)
+			} else {
+				console.log(tweets)
+				// console.log(response)
+			}
+		})
+		break
 	case 'spotify-this-song':
 		if (userData === undefined) {
 			spotify.search({type: 'track', query: '"The+Sign" artist:"Ace+of+Base"&limit=5'}, function (err,data) {
@@ -47,6 +59,7 @@ switch(command) {
 				}
 			})
 		}
+		break
 	case 'movie-this':
 		// handle for no movie input
 		if (userData !== undefined){
@@ -83,6 +96,8 @@ switch(command) {
 
 		// suppress the direct output of the call. you can expand the result below
 		"loading..."
+		break
 	case 'do-what-it-says':
 		// yet another thing 
+		break
 }
