@@ -21,7 +21,7 @@ switch(command) {
 		// do something
 	case 'spotify-this-song':
 		if (userData === undefined) {
-			spotify.search({type: 'track', query: '"The+Sign" artist:"Ace+of+Base"'}, function (err,data) {
+			spotify.search({type: 'track', query: '"The+Sign" artist:"Ace+of+Base"&limit=5'}, function (err,data) {
 				if (err) {
 					return console.log(err)
 				}else {
@@ -33,11 +33,15 @@ switch(command) {
 				}
 			})
 		} else {
-			spotify.search({type: 'track', query: userData, limit: 5}, function (err,data) {
+			spotify.search({type: 'track', query: userData + '&limit=5'}, function (err,data) {
 				if (err) {
 					return console.log(err)
 				} else {
-					console.log(data)
+					// console.log(data)
+					console.log('Artist:', data.tracks.items[0].artists[0].name)
+					console.log('Track:', data.tracks.items[0].name)
+					console.log('Preview Link:', data.tracks.items[0].preview_url)
+					console.log('Album:', data.tracks.items[0].album.name)
 				}
 			})
 		}
