@@ -1,6 +1,7 @@
 var twitterObj = require('./keys.js')
 var twitterKeys = twitterObj.twitterKeys
 
+var twitter = require('twitter')
 var spotify = require('spotify')
 var request = require('request')
 
@@ -9,7 +10,7 @@ var request = require('request')
 // var access_token_key = twitterKeys.access_token_key
 // var access_token_secret = twitterKeys.access_token_secret
 
-// console.log(twitterKeys.consumer_key)
+console.log(twitterKeys.consumer_key)
 // console.log(consumer_key)
 
 var command = process.argv[2]
