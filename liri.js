@@ -93,6 +93,14 @@ function spotifyThis() {
 				console.log('Track:', data.tracks.items[0].name)
 				console.log('Preview Link:', data.tracks.items[0].preview_url)
 				console.log('Album:', data.tracks.items[0].album.name)
+
+				var str = 'Artist: ' + data.tracks.items[0].artists[0].name + '\nTrack: ' +  data.tracks.items[0].name + '\nPreview Link: ' + data.tracks.items[0].preview_url + '\nAlbum: ' + data.tracks.items[0].album.name + '\n\n*****************************************\n\n'
+				fs.appendFile('log.txt', str, 'utf8', function(err) {
+					if (err) {
+						return console.log(err)
+					}
+					console.log('Log Updated!')
+				})
 			}
 		})
 	} else {
@@ -108,6 +116,14 @@ function spotifyThis() {
 				console.log('Track:', data.tracks.items[0].name)
 				console.log('Preview Link:', data.tracks.items[0].preview_url)
 				console.log('Album:', data.tracks.items[0].album.name)
+
+				var str = 'Artist: ' + data.tracks.items[0].artists[0].name + '\nTrack: ' +  data.tracks.items[0].name + '\nPreview Link: ' + data.tracks.items[0].preview_url + '\nAlbum: ' + data.tracks.items[0].album.name + '\n\n*****************************************\n\n'
+				fs.appendFile('log.txt', str, 'utf8', function(err) {
+					if (err) {
+						return console.log(err)
+					}
+					console.log('Log Updated!')
+				})
 			}
 		})
 	}
