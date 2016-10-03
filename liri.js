@@ -37,6 +37,9 @@ switch(command) {
 			userData = arr[1]
 			command = arr[0]
 
+			var text = process.argv[0] + ' ' + process.argv[1] + ' do-what-it-says\n\n'
+			fs.appendFileSync('log.txt', text, 'utf8')
+
 			switch(command) {
 				case 'my-tweets':
 					myTweets()
@@ -57,6 +60,8 @@ switch(command) {
 
 
 function myTweets() {
+	var text = process.argv[0] + ' ' + process.argv[1] + ' ' + 'my-tweets\n\n'
+	fs.appendFileSync('log.txt', text, 'utf8')
 	client.get('search/tweets', {q: '@SportsCenter', count: '20'}, function(err, tweets, response) {
 		if (err) {
 			return console.log(err)
@@ -94,7 +99,7 @@ function spotifyThis() {
 				console.log('Preview Link:', data.tracks.items[0].preview_url)
 				console.log('Album:', data.tracks.items[0].album.name)
 
-				var str = 'Artist: ' + data.tracks.items[0].artists[0].name + '\nTrack: ' +  data.tracks.items[0].name + '\nPreview Link: ' + data.tracks.items[0].preview_url + '\nAlbum: ' + data.tracks.items[0].album.name + '\n\n*****************************************\n\n'
+				var str = process.argv[0] + ' ' + process.argv[1] + ' ' + command + ' ' + userData + '\n\nArtist: ' + data.tracks.items[0].artists[0].name + '\nTrack: ' +  data.tracks.items[0].name + '\nPreview Link: ' + data.tracks.items[0].preview_url + '\nAlbum: ' + data.tracks.items[0].album.name + '\n\n*****************************************\n\n'
 				fs.appendFile('log.txt', str, 'utf8', function(err) {
 					if (err) {
 						return console.log(err)
@@ -117,7 +122,7 @@ function spotifyThis() {
 				console.log('Preview Link:', data.tracks.items[0].preview_url)
 				console.log('Album:', data.tracks.items[0].album.name)
 
-				var str = 'Artist: ' + data.tracks.items[0].artists[0].name + '\nTrack: ' +  data.tracks.items[0].name + '\nPreview Link: ' + data.tracks.items[0].preview_url + '\nAlbum: ' + data.tracks.items[0].album.name + '\n\n*****************************************\n\n'
+				var str = process.argv[0] + ' ' + process.argv[1] + ' ' + command + ' ' + userData + '\n\nArtist: ' + data.tracks.items[0].artists[0].name + '\nTrack: ' +  data.tracks.items[0].name + '\nPreview Link: ' + data.tracks.items[0].preview_url + '\nAlbum: ' + data.tracks.items[0].album.name + '\n\n*****************************************\n\n'
 				fs.appendFile('log.txt', str, 'utf8', function(err) {
 					if (err) {
 						return console.log(err)
@@ -163,7 +168,7 @@ function movieThis() {
 			console.log(movieObj.tomatoRating)
 			console.log(movieObj.tomatoURL)
 
-			var str = movieObj.Title + '\n' + movieObj.Year + '\n' + movieObj.imdbRating + '\n' + movieObj.Country + '\n' + movieObj.Language + '\n' + movieObj.Plot + '\n' + movieObj.Actors + '\n' + movieObj.tomatoRating + '\n' + movieObj.tomatoURL + '\n\n*****************************************\n\n'
+			var str = process.argv[0] + ' ' + process.argv[1] + ' ' + command + ' ' + userData + '\n\n' + movieObj.Title + '\n' + movieObj.Year + '\n' + movieObj.imdbRating + '\n' + movieObj.Country + '\n' + movieObj.Language + '\n' + movieObj.Plot + '\n' + movieObj.Actors + '\n' + movieObj.tomatoRating + '\n' + movieObj.tomatoURL + '\n\n*****************************************\n\n'
 			fs.appendFile('log.txt', str, 'utf8', function(err) {
 				if (err) {
 					return console.log(err)
