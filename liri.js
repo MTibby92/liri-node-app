@@ -150,6 +150,7 @@ function movieThis() {
 			// console.log(JSON.parse(body)) // Show the HTML for the Google homepage.
 			var movieObj = JSON.parse(body)
 			if (movieObj.Response == 'False') {
+				fs.appendFileSync('log.txt', 'Invalid movie title, please try again\n\n*****************************************\n\n', 'utf8')
 				return console.log('Invalid movie title, please try again')
 			}
 			console.log(movieObj.Title)
@@ -161,6 +162,15 @@ function movieThis() {
 			console.log(movieObj.Actors)
 			console.log(movieObj.tomatoRating)
 			console.log(movieObj.tomatoURL)
+
+			var str = movieObj.Title + '\n' + movieObj.Year + '\n' + movieObj.imdbRating + '\n' + movieObj.Country + '\n' + movieObj.Language + '\n' + movieObj.Plot + '\n' + movieObj.Actors + '\n' + movieObj.tomatoRating + '\n' + movieObj.tomatoURL + '\n\n*****************************************\n\n'
+			fs.appendFile('log.txt', str, 'utf8', function(err) {
+				if (err) {
+					return console.log(err)
+				}
+				console.log('Log Updated!')
+			})
+
 		} else {
 			console.warn(error);
 		}
