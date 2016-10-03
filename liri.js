@@ -51,6 +51,9 @@ switch(command) {
 				if (err) {
 					return console.log(err)
 				} else {
+					if (data.tracks.items.length == 0) {
+						return console.log('Track not found, please search again')
+					}
 					// console.log(data)
 					console.log('Artist:', data.tracks.items[0].artists[0].name)
 					console.log('Track:', data.tracks.items[0].name)
@@ -80,6 +83,9 @@ switch(command) {
 			if (!error && response.statusCode == 200) {
 				// console.log(JSON.parse(body)) // Show the HTML for the Google homepage.
 				var movieObj = JSON.parse(body)
+				if (movieObj.Response == 'False') {
+					return console.log('Invalid movie title, please try again')
+				}
 				console.log(movieObj.Title)
 				console.log(movieObj.Year)
 				console.log(movieObj.imdbRating)
